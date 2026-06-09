@@ -1,0 +1,52 @@
+<h2>Alunos Cadastrados</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+    </tr>
+
+    {% for aluno in alunos %}
+    <tr>
+
+        <td>{{ aluno.id }}</td>
+
+        <form method="POST" action="{{ url_for('editar', aluno_id=aluno.id) }}">
+            <td>
+                <input
+                    type="text"
+                    name="nome"
+                    value="{{ aluno.nome }}"
+                    required
+                >
+            </td>
+
+            <td>
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ aluno.email }}"
+                    required
+                >
+            </td>
+
+            <td>
+                <button type="submit">Salvar</button>
+            </td>
+        </form>
+
+        <td>
+            <form
+                method="POST"
+                action="{{ url_for('excluir', aluno_id=aluno.id) }}"
+            >
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
